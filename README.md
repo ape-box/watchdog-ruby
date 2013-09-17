@@ -8,6 +8,11 @@ watchdog-ruby
     cd watchdog-ruby
     mkdir .gems
     export GEM_HOME=$PWD/.gems
-    gem install rb-inotify
+    export RUBYLIB=$PWD.gems/lib
+    export PATH=$PWD.gems/bin:$PATH
+    gem1.9 install rb-inotify
 
 and then modify rdog.rb with apropriate options
+
+## Crontab options:
+# todo

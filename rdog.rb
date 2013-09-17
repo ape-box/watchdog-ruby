@@ -1,11 +1,21 @@
 require "rb-inotify"
 
 notifier = INotify::Notifier.new
-paths    = ["/home/alessio/watchdog"]
+# Beware not adding too many mirectories,
+# i have enabled recursive watching and that's eavy
+paths    = [
+    "/home/alessio/joomlainstallation1/images",
+    "/home/alessio/joomlainstallation2/images",
+    "/home/alessio/joomlainstallation3/images",
+    "/home/alessio/joomlainstallation4/images",
+]
 unwanted = [".gif", ".php"]
 moveto   = "/home/alessio/trash"
 
+a = Time.now.to_f * 1000000
+a = a.to_i
 paths.each do |path|
+    # the :recursive option can be safely removed
     notifier.watch(path, :create, :recursive) do |event|
         unless event.flags.include?(:isdir)
             puts "#{event.name} #{event.flags} in #{path} [#{event.absolute_name}]"
@@ -29,6 +39,10 @@ paths.each do |path|
         end
     end
 end
+
+b = Time.now.to_f * 1000000
+b = b.to_i
+puts "Done adding watchers in #{b - a} micro seconds"
 
 status = :running
 Signal.trap("SIGINT") { status = :exit }
