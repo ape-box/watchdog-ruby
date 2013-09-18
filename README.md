@@ -2,7 +2,7 @@ watchdog-ruby
 =============
 
 
-## Install istructions for webfaction environment
+## Manual Install istructions for webfaction environment
 
     git clone https://github.com/ape-box/watchdog-ruby
     cd watchdog-ruby
@@ -15,4 +15,15 @@ watchdog-ruby
 and then modify rdog.rb with apropriate options
 
 ## Crontab options:
-# todo
+
+As crontab run with a plain environment you should use start.sh to launch it, so that ruby have the correct environment varibles
+
+My crontab listings:
+
+    MAILTO="myaddress@email.com"
+    MAILFROM="myaddress@email.com"
+
+    */30 * * * * /home/alessio/watchdog-ruby/start.sh >> /home/alessio/watchdog-ruby/watch.log
+    */30 * * * * /home/alessio/watchdog-ruby/kill.sh >> /home/alessio/watchdog-ruby/watch.log
+
+
