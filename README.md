@@ -3,7 +3,7 @@ watchdog-ruby
 
 **WARNING: setup, start and crontab jobs are not working properly!**
 
-## Manual Install istructions for webfaction environment
+## Manual Install instructions for webfaction environment
 
     git clone https://github.com/ape-box/watchdog-ruby
     cd watchdog-ruby
