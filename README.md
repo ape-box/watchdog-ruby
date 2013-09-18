@@ -1,7 +1,7 @@
 watchdog-ruby
 =============
 
-** WARNING: setup, start and crontab jobs are not working properly! **
+**WARNING: setup, start and crontab jobs are not working properly!**
 
 ## Manual Install istructions for webfaction environment
 
