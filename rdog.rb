@@ -23,22 +23,22 @@ waitfor  = 60                       # wait for other istance to exit, set to nil
 
 # i prefer having only one instance
 if File.exists?("#{var_run}/rdog.pid")
-    puts "\nI am allready runnig!"
+    puts "\n[#{Time.now}] I am allready runnig!"
     exit if waitfor.nil?
 
-    puts "Wainting availability"
+    puts "[#{Time.now}] Wainting availability"
     ws = Time.now.to_i
     while File.exists?("#{var_run}/rdog.pid")
         wn = Time.now.to_i
         if (wn - ws) >= waitfor
-            puts "Too busy, max time reached!"
+            puts "[#{Time.now}] Too busy, max time reached!"
             exit
         end
     end
 end
 
 # Saving PID to file so you can set crontab to call kill.sh to shutdown and relaunch
-puts "\nI am #{Process.pid}"
+puts "\n[#{Time.now}] I am #{Process.pid}"
 File.open("#{var_run}/rdog.pid", 'w') {|f| f.write(Process.pid)}
 
 a = Time.now.to_f * 1000000
@@ -49,14 +49,14 @@ paths.each do |path|
         unless event.flags.include?(:isdir)
             unwanted.each do |ext|
                 if event.name.end_with?(ext)
-                    puts "ALLERT UNWANTED FILE #{event.name}"
+                    puts "[#{Time.now}] ALLERT UNWANTED FILE #{event.name}"
                     if moveto.is_a? String
                         identifier = Time.now.to_f * 1000000
                         identifier = identifier.to_i.to_s
                         while File.exists?("#{moveto}/#{identifier}.danger")
                             identifier = "#{identifier}-double"
                         end
-                        puts "identifier id #{identifier}"
+                        puts "[#{Time.now}] identifier id #{identifier}"
                         File.rename(event.absolute_name, "#{moveto}/#{identifier}.danger")
                         File.open("#{moveto}/#{identifier}.path", 'w') {|f| f.write(event.absolute_name) }
                     else
@@ -70,7 +70,7 @@ end
 
 b = Time.now.to_f * 1000000
 b = b.to_i
-puts "Done adding watchers in #{b - a} micro seconds"
+puts "[#{Time.now}] Done adding watchers in #{b - a} micro seconds"
 
 status = :running
 Signal.trap("SIGINT") { status = :exit }
@@ -81,4 +81,4 @@ while status == :running do
 end
 
 File.delete("#{var_run}/rdog.pid")
-puts "Byez!"
+puts "\n[#{Time.now}] Byez!"
