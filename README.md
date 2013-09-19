@@ -1,7 +1,6 @@
 watchdog-ruby
 =============
 
-**WARNING: setup, start and crontab jobs are not working properly!**
 
 ## Manual Install instructions for webfaction environment
 
@@ -28,3 +27,6 @@ My crontab listings:
     */30 * * * * /home/alessio/watchdog-ruby/kill.sh >> /home/alessio/watchdog-ruby/watch.log
 
 
+# Errors
+
+If something it's not working properly try using "dos2unix" to correct line endings, if that is not the problem mail me.
