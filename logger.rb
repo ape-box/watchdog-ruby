@@ -5,12 +5,12 @@ require "rb-inotify"
 # i have enabled recursive watching and that's heavy
 # please chek on a virtual machine or somewhere safe
 
-# paths    = [
-#     "/home/alessio/joomlainstallation1/images",
-#     "/home/alessio/joomlainstallation2/images",
-#     "/home/alessio/joomlainstallation3/images",
-#     "/home/alessio/joomlainstallation4/images",
-# ]
+paths    = [
+    "/home/alessio/joomlainstallation1/images",
+    "/home/alessio/joomlainstallation2/images",
+    "/home/alessio/joomlainstallation3/images",
+    "/home/alessio/joomlainstallation4/images",
+]
 
 pwd      = File.dirname(__FILE__)
 unwanted = [".gif", ".php"]         # List of unwanted extensions
